@@ -53,7 +53,7 @@ class AnimeQuizApp(App):
         self.layout.add_widget(self.answer_label)
         self.layout.add_widget(self.menu_widjet)
         self.layout.add_widget(self.options_layout)
-        self.image_widget = Image(source='', height="300dp")
+        self.image_widget = Image(source='', height="450dp")
 
         self.start_button = Button(text='Начать викторину',size_hint = (1,2),font_size=50, on_press=self.start_quiz)
         self.layout.add_widget(self.start_button)
@@ -74,17 +74,25 @@ class AnimeQuizApp(App):
 
 
     def show_question(self):
+        # Очищаем виджеты для обновления
+        self.layout.clear_widgets()
+
+        # Показываем вопрос
         self.question_label.text = self.questions[self.current_question_index]['question']
-        self.options_layout.clear_widgets()
-        self.image_widget.source = self.questions[self.current_question_index]["image"]
-        # Добавляем варианты ответа после изображения
+        self.layout.add_widget(self.question_label)
+
+        # Добавляем изображение, если оно есть
+        image_source = self.questions[self.current_question_index]["image"]
+        if image_source:
+            self.image_widget = Image(source=image_source, size_hint_y=None, height="350dp" )
+            self.layout.add_widget(self.image_widget)
+
+        # Добавляем варианты ответов
         for option in self.questions[self.current_question_index]['options']:
             button = Button(text=option, on_press=self.check_answer)
-            self.options_layout.add_widget(button)
-            if self.image_widget.source:
-                if self.image_widget.parent:  # Проверяем, есть ли у self.image_widget родитель
-                    self.image_widget.parent.remove_widget(self.image_widget)  # Удаляем его, если есть
-                self.layout.add_widget(self.image_widget)
+            self.layout.add_widget(button)
+
+
     def check_answer(self, instance):
         answer = instance.text
         correct_answer = self.questions[self.current_question_index]['answer']
@@ -101,20 +109,39 @@ class AnimeQuizApp(App):
         result_text = 'Тест завершен! '
         if self.score == 6:
             result_text += 'Вы - Сатору Годзё из Магической битвы!'
+            self.satoru_widjet = Image(source='satoru.jpg', size_hint_y=None,
+                                       height="450dp")
+            self.layout.add_widget(self.satoru_widjet)
         elif self.score == 5:
-            result_text += 'Вы - Саске Учиха из Наруто!'
+            result_text += 'Вы - Куросаки Ичигоа из Блич!'
+            self.satoru_widjet = Image(source='Ihigo.jpg', size_hint_y=None,
+                                       height="450dp")
+            self.layout.add_widget(self.satoru_widjet)
         elif self.score == 4:
-            result_text += 'Вы - Сакура из Наруто!'
+            result_text += 'Вы - Мегумин из Коносуба!'
+            self.satoru_widjet = Image(source='megumin.jpg', size_hint_y=None,
+                                       height="450dp")
+            self.layout.add_widget(self.satoru_widjet)
         elif self.score == 3:
-            result_text += 'Вы - Наруто из Наруто!'
+            result_text += 'Вы - Марин Китагава из Эта фарфоровая кукла влюбилась!'
+            self.satoru_widjet = Image(source='marin.jpeg', size_hint_y=None,
+                                       height="450dp")
+            self.layout.add_widget(self.satoru_widjet)
         elif self.score == 2:
             result_text += 'Вы - Эрен Йегер из Атаки Титанов!'
+            self.satoru_widjet = Image(source='eren.jpg', size_hint_y=None,
+                                       height="450dp")
+            self.layout.add_widget(self.satoru_widjet)
         else:
             result_text += 'Вы - Канеки Кен из Токийскго Гуля!'
+            self.satoru_widjet = Image(source='ken.jpg', size_hint_y=None,
+                                       height="450dp")
+            self.layout.add_widget(self.satoru_widjet)
         result_label = Label(text=result_text)
         restart_button = Button(text='Начать заново', on_press=self.restart_quiz)
         self.layout.clear_widgets()
         self.layout.add_widget(result_label)
+        self.layout.add_widget(self.satoru_widjet)
         self.layout.add_widget(restart_button)
 
     def restart_quiz(self, instance):
