@@ -29,7 +29,16 @@ class AnimeQuizApp(App):
             {"question": "Какой женский персонаж тебе нравится?",
              "options": ["Микаса (Атака Титанов)", "Маи Сакурадзима (Этот глупый свин)", "Хината (Наруто)",
                          "Асуна Юки (Мастер меча онлайн)"], "answer": "Маи Сакурадзима (Этот глупый свин)",
-             "image": "girl.jpg"}
+             "image": "girl.jpg"},
+            {"question": "Какой у тебя  тип  темперамента?",
+             "options": ["Холерик", "Сангвиник", "Флегматик",
+                         "Меланхолик"], "answer": "Сангвиник",
+             "image": "emoji.png"},
+            {"question": "Какой у тебя любимый цвет?",
+             "options": ["Синий", "Черный", "Белый",
+                         "Красный", "Зеленый", "Фиолетовый"], "answer": "Синий",
+             "image": "color.jpg"},
+
 
         ]
 
@@ -45,7 +54,7 @@ class AnimeQuizApp(App):
         self.answer_label = Label(text='')
         self.options_layout = BoxLayout(orientation='vertical')
         self.menu_label = Label(text="Кто ты из аниме?",font_size='40sp')
-        self.menu_widjet = Image(source='C:\\Users\\user\\Downloads\\scale_1200.png',size_hint_y=None, height="450dp")
+        self.menu_widjet = Image(source='menu.png',size_hint_y=None, height="450dp")
         self.layout.add_widget(self.question_label)
 
 
@@ -107,22 +116,22 @@ class AnimeQuizApp(App):
 
     def show_results(self):
         result_text = 'Тест завершен! '
-        if self.score == 6:
+        if self.score == 10 and self.score == 9 :
             result_text += 'Вы - Сатору Годзё из Магической битвы!'
             self.satoru_widjet = Image(source='satoru.jpg', size_hint_y=None,
                                        height="450dp")
             self.layout.add_widget(self.satoru_widjet)
-        elif self.score == 5:
+        elif self.score == 8 and self.score == 7:
             result_text += 'Вы - Куросаки Ичигоа из Блич!'
             self.satoru_widjet = Image(source='Ihigo.jpg', size_hint_y=None,
                                        height="450dp")
             self.layout.add_widget(self.satoru_widjet)
-        elif self.score == 4:
+        elif self.score == 6 and self.score == 5:
             result_text += 'Вы - Мегумин из Коносуба!'
             self.satoru_widjet = Image(source='megumin.jpg', size_hint_y=None,
                                        height="450dp")
             self.layout.add_widget(self.satoru_widjet)
-        elif self.score == 3:
+        elif self.score == 4 and self.score == 3:
             result_text += 'Вы - Марин Китагава из Эта фарфоровая кукла влюбилась!'
             self.satoru_widjet = Image(source='marin.jpeg', size_hint_y=None,
                                        height="450dp")
